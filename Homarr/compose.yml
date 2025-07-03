@@ -1,0 +1,15 @@
+#---------------------------------------------------------------------#
+#     Homarr - A simple, yet powerful dashboard for your server.      #
+#---------------------------------------------------------------------#
+services:
+  homarr:
+    container_name: homarr
+    image: ghcr.io/homarr-labs/homarr:latest
+    restart: unless-stopped
+    volumes:
+      #- /var/run/docker.sock:/var/run/docker.sock # Optional, only if you want docker integration
+      - ./homarr:/appdata
+    environment:
+      - SECRET_ENCRYPTION_KEY=305776bfeaece2de7b7710362a9dd2767b287ae52646bc32fa9697b3e7fe9e4e # Replace with your own secret key, use openssl rand -hex 32
+    ports:
+      - '7575:7575'
