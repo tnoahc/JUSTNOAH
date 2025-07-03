@@ -1,0 +1,16 @@
+---
+services:
+  audiobookshelf:
+    image: ghcr.io/advplyr/audiobookshelf:latest
+    container_name: audiobookshelf
+    restart: unless-stopped
+    ports:
+      - 13378:80
+    volumes:
+      - ./Audiobooks:/audiobooks
+      - ./Podcasts:/podcasts
+      - ./E-Books:/E-Books
+      - ./config:/config
+      - ./metadata:/metadata
+    environment:
+      - TZ=Africa/Kampala # Set your timezone
