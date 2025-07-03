@@ -1,0 +1,15 @@
+---
+services:
+ web:
+    image: gitlab/gitlab-ce:latest
+    container_name: gitlab
+    restart: always
+    hostname: gitlab.your-address.example.com # Replace with your domain
+    ports:
+        - 2080:80
+        - 2443:443
+        - 2222:22
+    volumes:
+        - ./config:/etc/gitlab
+        - ./logs:/var/log/gitlab
+        - ./data:/var/opt/gitlab
