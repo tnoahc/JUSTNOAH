@@ -1,0 +1,18 @@
+---
+services:
+  jellyfin:
+    image: jellyfin/jellyfin:latest
+    container_name: jellyfin
+    environment:
+      - TZ=Africa/Kampala # Set your timezone
+      - JELLYFIN_PublishedServerUrl=https://your-address.example.com #optional
+    volumes:
+      - ./config:/config
+      - ./cache:/cache
+      - ./Media:/Media
+    ports:
+      - 8096:8096
+      #- 8920:8920 #optional
+      #- 7359:7359/udp #optional
+      #- 1900:1900/udp #optional
+    restart: unless-stopped
