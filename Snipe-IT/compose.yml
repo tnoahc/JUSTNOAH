@@ -1,0 +1,34 @@
+---
+services:
+  snipe-it:
+    image: snipe/snipe-it
+    container_name: assets
+    restart: always
+    env_file:
+        - .env
+    ports:
+        - 2320:80
+    environment:
+    # Snipe-IT Settings
+        - APP_ENV=production
+        - APP_DEBUG=false
+        - APP_KEY=${APP_KEY}
+        - APP_URL=${APP_URL}
+        - APP_TIMEZONE=Africa/Kampala
+        - APP_LOCALE=en
+   # Email Parameters
+        - MAIL_PORT_587_TCP_ADDR=${MAIL_PORT_587_TCP_ADDR}
+        - MAIL_PORT_587_TCP_PORT=587
+        - MAIL_ENV_FROM_ADDR=${MAIL_ENV_FROM_ADDR}
+        - MAIL_ENV_FROM_NAME=${MAIL_ENV_FROM_NAME}
+        - MAIL_ENV_ENCRYPTION=tcp
+        - MAIL_ENV_USERNAME=${MAIL_ENV_USERNAME}
+        - MAIL_ENV_PASSWORD=${MAIL_ENV_PASSWORD}
+    # Mysql Parameters
+        - MYSQL_PORT_3306_TCP_ADDR=${MYSQL_PORT_3306_TCP_ADDR}
+        - MYSQL_PORT_3306_TCP_PORT=3306
+        - MYSQL_DATABASE=${MYSQL_DATABASE}
+        - MYSQL_USER=${MYSQL_USER}
+        - MYSQL_PASSWORD=${MYSQL_PASSWORD}
+    volumes:
+        - ./assets:/var/lib/snipeit # Persistent storage for Snipe-IT data
