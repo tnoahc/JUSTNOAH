@@ -1,0 +1,38 @@
+---
+services:
+  docuseal:
+    depends_on:
+      postgresql:
+        condition: service_healthy
+    image: docuseal/docuseal:latest
+    container_name: docuseal
+    env_file:
+        - .env
+    ports:
+        - 3024:3000
+    volumes:
+        - ./data:/data
+    restart: always
+    environment:
+        #- FORCE_SSL=${HOST}
+        - DS_DB_USERNAME=${POSTGRES_USER}
+        - DS_DB_URL_DATABASE=${POSTGRES_DB}
+        - DS_DB_PASSWORD=${POSTGRES_PASSWORD}
+        - DS_DB_URL_HOST=postgresql
+        - DS_DB_URL_PORT=5432
+
+  postgresql:
+    image: postgres:16
+    container_name: postgres
+    environment:
+        - POSTGRES_USER=${POSTGRES_USER}
+        - POSTGRES_DB=${POSTGRES_DB}
+        - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+    volumes:
+        - './postgresql_data:/var/lib/postgresql/data'
+    restart: always
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 5s
+      timeout: 5s
+      retries: 5

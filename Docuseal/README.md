@@ -1,0 +1,1 @@
+Open source platform that provides secure and efficient digital document signing and processing.
