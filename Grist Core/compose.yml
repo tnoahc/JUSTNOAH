@@ -1,0 +1,11 @@
+---
+services:
+    grist:
+        container_name: grist-core
+        image: gristlabs/grist
+        ports:
+            - 8484:8484
+        volumes:
+            - ./grist-core:/persist
+        stdin_open: true
+        tty: true
